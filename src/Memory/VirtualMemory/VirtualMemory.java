@@ -9,6 +9,8 @@ public class VirtualMemory {
     private final int totalNumberOfPages;
     private final Page[] pageArray;
 
+    private Page[] referenceString;
+
     private final Random rand = new Random();
 
     public VirtualMemory(int totalNumberOfPages) {
@@ -30,15 +32,12 @@ public class VirtualMemory {
         }
     }
 
-    public Page[] generateRandomReferenceString(int stringLength){
-
-        Page[] referenceString = new Page[stringLength];
+    public void generateRandomReferenceString(int stringLength){
+        referenceString = new Page[stringLength];
 
         for(int i = 0; i < referenceString.length; i++){
             referenceString[i] = pageArray[rand.nextInt(pageArray.length)];
         }
-
-        return referenceString;
     }
 
     public int getTotalNumberOfPages() {
@@ -47,5 +46,9 @@ public class VirtualMemory {
 
     public Page[] getPageArray() {
         return pageArray;
+    }
+
+    public Page[] getReferenceString() {
+        return referenceString;
     }
 }

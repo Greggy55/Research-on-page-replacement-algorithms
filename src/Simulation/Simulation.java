@@ -24,6 +24,7 @@ public class Simulation {
     }
 
     public void start(){
-        System.out.println(Arrays.toString(virtualMemory.generateRandomReferenceString(referenceStringLength)));
+        virtualMemory.generateRandomReferenceString(referenceStringLength);
+
     }
 }
