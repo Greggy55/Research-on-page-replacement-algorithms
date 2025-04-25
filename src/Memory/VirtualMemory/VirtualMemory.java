@@ -15,6 +15,10 @@ public class VirtualMemory {
         this.totalNumberOfPages = totalNumberOfPages;
         pageArray = new Page[totalNumberOfPages];
 
+        generatePages();
+    }
+
+    private void generatePages() {
         for(int i = 0; i < totalNumberOfPages; i++){
             char ch;
             do{
@@ -37,13 +41,6 @@ public class VirtualMemory {
         return referenceString;
     }
 
-//    public void addProcess(Process process){
-//        char[] memoryReferences = process.getMemoryReferences();
-//        for(int i = 0; i < memoryReferences.length; i++){
-//            pageArray[i] = new Page(memoryReferences[i]);
-//        }
-//    }
-
     public int getTotalNumberOfPages() {
         return totalNumberOfPages;
     }
@@ -51,6 +48,4 @@ public class VirtualMemory {
     public Page[] getPageArray() {
         return pageArray;
     }
-
-
 }
