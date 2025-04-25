@@ -9,9 +9,9 @@ import java.util.Arrays;
 public abstract class Algorithm {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_YELLOW = "\u001B[38;5;228m";
+    public static final String ANSI_GREEN = "\u001B[38;5;120m";
+    public static final String ANSI_GRAY = "\u001B[38;5;244m";
 
     protected int pageFaultCount = 0;
     protected int thrashingCount = 0;
@@ -33,8 +33,8 @@ public abstract class Algorithm {
     public void run(Page[] referenceString){
         memory.clear();
         if(print){
-            System.out.printf("(%s) Run\n", name);
-            System.out.printf("(%s) Reference string: " + Arrays.toString(referenceString) + "\n", name);
+            System.out.printf("%s Run\n", name);
+            System.out.printf("%s Reference string: " + Arrays.toString(referenceString) + "\n", name);
         }
 
         for(int i = 0; i < referenceString.length; i++){
@@ -42,14 +42,14 @@ public abstract class Algorithm {
 
             if(print){
                 System.out.println();
-                System.out.printf("(%s) Iteration: " + i + "\n", name);
-                System.out.printf("(%s) " + memory + "\n", name);
-                System.out.printf("(%s) Current page: " + currentPage + "\n", name);
+                System.out.printf("%s Iteration: " + ANSI_YELLOW + i + ANSI_RESET + "\n", name);
+                System.out.printf("%s " + memory + "\n", name);
+                System.out.printf("%s Current page: " + ANSI_YELLOW + currentPage + ANSI_RESET + "\n", name);
             }
 
             if(pageFault()){
                 if(print){
-                    System.out.printf("(%s)"+ANSI_RED+" Page fault\n"+ANSI_RESET, name);
+                    System.out.printf("%s Page " + ANSI_RED + "fault\n"+ANSI_RESET, name);
                 }
                 pageFaultCount++;
 
@@ -57,7 +57,7 @@ public abstract class Algorithm {
             }
             else{
                 if(print){
-                    System.out.printf("(%s) Page OK\n", name);
+                    System.out.printf("%s Page " + ANSI_GREEN + "OK\n" + ANSI_RESET, name);
                 }
             }
 
@@ -65,8 +65,8 @@ public abstract class Algorithm {
 
         if(print){
             System.out.println();
-            System.out.printf("(%s) End\n", name);
-            System.out.printf("(%s) " + memory + "\n", name);
+            System.out.printf("%s End\n", name);
+            System.out.printf("%s " + memory + "\n", name);
 
             System.out.println();
             System.out.println("-".repeat(100));
@@ -77,7 +77,7 @@ public abstract class Algorithm {
     public void printStatistics() {
         final int dashes = 15;
         System.out.println();
-        System.out.printf("%s %s %s\n", "-".repeat(dashes), name, "-".repeat(dashes - name.length() + dashes/3));
+        System.out.printf("%s %s %s\n", "-".repeat(dashes), name, "-".repeat(dashes - name.length() + ANSI_GRAY.length() + ANSI_RESET.length() + dashes/3));
         System.out.printf("Page fault count: %d\n", pageFaultCount);
         System.out.printf("Trashing count: %d\n", thrashingCount);
     }
@@ -89,7 +89,7 @@ public abstract class Algorithm {
     public void printReplacementFrame(Frame replacementFrame) {
         if (print) {
             String msg = (replacementFrame != null) ? replacementFrame.toString() : "Empty frame";
-            System.out.printf("(%s) Replacement frame: %s\n", name, msg);
+            System.out.printf("%s Replacement frame: %s\n", name, msg);
         }
     }
 }

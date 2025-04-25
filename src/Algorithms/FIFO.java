@@ -13,7 +13,7 @@ public class FIFO extends Algorithm {
 
     public FIFO(boolean print, PhysicalMemory memory) {
         super(print, memory);
-        name = "FIFO";
+        name = ANSI_GRAY + "FIFO" + ANSI_RESET;
     }
 
     @Override

@@ -10,7 +10,7 @@ public class RAND extends Algorithm {
 
     public RAND(boolean print, PhysicalMemory memory) {
         super(print, memory);
-        name = "RAND";
+        name = ANSI_GRAY + "RAND" + ANSI_RESET;
     }
 
     @Override
