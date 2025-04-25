@@ -3,6 +3,9 @@ package Memory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
 public class Frame {
+    public static final String ANSI_RESET = "\u001B[0m";
+    private int colorCode = 0;
+
     private Page page;
     private boolean containsPage;
 
@@ -40,8 +43,18 @@ public class Frame {
 
     @Override
     public String toString() {
-        return "|"+
-                (!containsPage ? " " : page)
-                +"|";
+        return ansi256(colorCode) + "|" + (!containsPage ? " " : page) + "|" + ANSI_RESET;
+    }
+
+    public int getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(int colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    public static String ansi256(int code) {
+        return "\u001B[38;5;" + code + "m";
     }
 }

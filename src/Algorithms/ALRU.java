@@ -1,7 +1,6 @@
 package Algorithms;
 
 import Memory.PhysicalMemory.PhysicalMemory;
-import Memory.VirtualMemory.Page;
 
 public class ALRU extends Algorithm {
     public ALRU(boolean print, PhysicalMemory memory) {
@@ -9,7 +8,8 @@ public class ALRU extends Algorithm {
     }
 
     @Override
-    public void run(Page[] referenceString) {
+    public void replacePage() {
 
     }
+
 }

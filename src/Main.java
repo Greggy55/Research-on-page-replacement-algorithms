@@ -3,9 +3,9 @@ import Simulation.Simulation;
 public class Main {
     public static void main(String[] args) {
 
-        int numberOfFrames = 4;
-        int totalNumberOfPages = 5;
-        int referenceStringLength = 12;
+        int numberOfFrames = 20;
+        int totalNumberOfPages = 50;
+        int referenceStringLength = 120;
 
         boolean printFIFO = true;
         boolean printRAND = true;
