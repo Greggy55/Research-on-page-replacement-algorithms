@@ -38,4 +38,11 @@ public class Frame {
     public boolean containsPage() {
         return containsPage;
     }
+
+    @Override
+    public String toString() {
+        return "|"+
+                (!containsPage ? " " : page)
+                +"|";
+    }
 }

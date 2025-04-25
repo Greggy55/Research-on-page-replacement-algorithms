@@ -1,8 +1,8 @@
 package Simulation;
 
+import Algorithms.FIFO;
+import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.VirtualMemory;
-
-import java.util.Arrays;
 
 public class Simulation {
     private final int numberOfFrames;
@@ -10,6 +10,9 @@ public class Simulation {
     private final int referenceStringLength;
 
     private VirtualMemory virtualMemory;
+    private PhysicalMemory physicalMemory;
+
+    private FIFO fifo;
 
     public Simulation(
             int numberOfFrames,
@@ -21,10 +24,13 @@ public class Simulation {
         this.referenceStringLength = referenceStringLength;
 
         virtualMemory = new VirtualMemory(totalNumberOfPages);
+        physicalMemory = new PhysicalMemory(numberOfFrames);
+
+        fifo = new FIFO(true);
     }
 
     public void start(){
         virtualMemory.generateRandomReferenceString(referenceStringLength);
-
+        fifo.run(virtualMemory.getReferenceString(), physicalMemory);
     }
 }

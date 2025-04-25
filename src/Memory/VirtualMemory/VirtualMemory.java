@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class VirtualMemory {
     private static final ArrayList<Character> used = new ArrayList<>();
+    private static final char emptyChar = ' ';
 
     private final int totalNumberOfPages;
     private final Page[] pageArray;
@@ -16,6 +17,7 @@ public class VirtualMemory {
     public VirtualMemory(int totalNumberOfPages) {
         this.totalNumberOfPages = totalNumberOfPages;
         pageArray = new Page[totalNumberOfPages];
+        used.add(emptyChar);
 
         generatePages();
     }
@@ -24,7 +26,8 @@ public class VirtualMemory {
         for(int i = 0; i < totalNumberOfPages; i++){
             char ch;
             do{
-                ch = (char)(rand.nextInt(Character.MAX_VALUE));
+                //ch = (char)(rand.nextInt(Character.MAX_VALUE));
+                ch = (char)(rand.nextInt(totalNumberOfPages) + '0');
             } while(used.contains(ch));
 
             pageArray[i] = new Page(ch);
@@ -38,6 +41,21 @@ public class VirtualMemory {
         for(int i = 0; i < referenceString.length; i++){
             referenceString[i] = pageArray[rand.nextInt(pageArray.length)];
         }
+
+        referenceString = new Page[]{
+                new Page('1'),
+                new Page('2'),
+                new Page('3'),
+                new Page('4'),
+                new Page('1'),
+                new Page('2'),
+                new Page('5'),
+                new Page('1'),
+                new Page('2'),
+                new Page('3'),
+                new Page('4'),
+                new Page('5'),
+        };
     }
 
     public int getTotalNumberOfPages() {
