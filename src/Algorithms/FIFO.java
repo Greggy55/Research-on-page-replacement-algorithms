@@ -4,7 +4,6 @@ import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,21 +11,22 @@ public class FIFO extends Algorithm {
 
     private Queue<Frame> history = new LinkedList<>();
 
-    public FIFO(boolean print) {
-        super(print);
+    public FIFO(boolean print, PhysicalMemory memory) {
+        super(print, memory);
         name = "FIFO";
     }
 
     @Override
-    public void run(Page[] referenceString, PhysicalMemory memory) {
-        memory.clear();
-        if(print){
-            System.out.printf("(%s) Run\n", name);
-            System.out.printf("(%s) Reference string: " + Arrays.toString(referenceString) + "\n", name);
-        }
+    public void replacePage() {
+
+    }
+
+    @Override
+    public void run(Page[] referenceString) {
+        super.run(referenceString);
 
         for(int i = 0; i < referenceString.length; i++){
-            Page currentPage = referenceString[i];
+            currentPage = referenceString[i];
 
             if(print){
                 System.out.println();
@@ -36,19 +36,20 @@ public class FIFO extends Algorithm {
                 System.out.printf("(%s) Current page: " + currentPage + "\n", name);
             }
 
-            int index = memory.indexOfPage(currentPage);
-
-            if(index == -1){
+            if(pageFault()){
                 if(print){
                     System.out.printf("(%s) Page fault\n", name);
                 }
                 pageFaultCount++;
 
-                index = memory.findEmptyFrame();
-                //System.out.println("index: " + index);
+                int index = memory.findEmptyFrame();
 
                 if(index == -1){
                     Frame replacementFrame = history.poll();
+                    if(print){
+                        System.out.printf("(%s) Replacement frame: " + replacementFrame + "\n", name);
+                    }
+
                     assert replacementFrame != null: "(%s) Replacement frame is null\n".formatted(name);
                     replacementFrame.setPage(currentPage);
                     history.add(replacementFrame);
@@ -65,6 +66,7 @@ public class FIFO extends Algorithm {
             }
 
         }
-    }
 
+        endRun();
+    }
 }

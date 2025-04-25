@@ -58,7 +58,7 @@ public class VirtualMemory {
         };
     }
 
-    public int getTotalNumberOfPages() {
+    public int size() {
         return totalNumberOfPages;
     }
 

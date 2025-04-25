@@ -22,7 +22,6 @@ public class Frame {
     public void clear(){
         page = null;
         containsPage = false;
-        System.out.println("clear");
     }
 
     public void setPage(Page page) {

@@ -1,6 +1,7 @@
 package Simulation;
 
 import Algorithms.FIFO;
+import Algorithms.RAND;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.VirtualMemory;
 
@@ -13,6 +14,7 @@ public class Simulation {
     private PhysicalMemory physicalMemory;
 
     private FIFO fifo;
+    private RAND rand;
 
     public Simulation(
             int numberOfFrames,
@@ -32,15 +34,18 @@ public class Simulation {
         virtualMemory = new VirtualMemory(totalNumberOfPages);
         physicalMemory = new PhysicalMemory(numberOfFrames);
 
-        fifo = new FIFO(printFIFO);
+        fifo = new FIFO(printFIFO, physicalMemory);
+        rand = new RAND(printRAND, physicalMemory);
     }
 
     public void start(){
         virtualMemory.generateRandomReferenceString(referenceStringLength);
-        fifo.run(virtualMemory.getReferenceString(), physicalMemory);
+        fifo.run(virtualMemory.getReferenceString());
+        rand.run(virtualMemory.getReferenceString());
     }
 
     public void printStatistics() {
         fifo.printStatistics();
+        rand.printStatistics();
     }
 }

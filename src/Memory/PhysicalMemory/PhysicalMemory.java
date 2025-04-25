@@ -2,8 +2,6 @@ package Memory.PhysicalMemory;
 
 import Memory.VirtualMemory.Page;
 
-import java.util.Arrays;
-
 public class PhysicalMemory {
     // size
     private final int numberOfFrames;

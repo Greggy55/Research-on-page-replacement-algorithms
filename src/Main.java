@@ -8,7 +8,7 @@ public class Main {
         int referenceStringLength = 12;
 
         boolean printFIFO = true;
-        boolean printRAND = false;
+        boolean printRAND = true;
         boolean printOPT = false;
         boolean printLRU = false;
         boolean printALRU = false;
