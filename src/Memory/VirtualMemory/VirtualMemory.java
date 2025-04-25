@@ -13,7 +13,7 @@ public class VirtualMemory {
 
     private Page[] referenceString;
 
-    private final Random rand = new Random();
+    private final Random rnd = new Random();
 
     public VirtualMemory(int totalNumberOfPages) {
         this.totalNumberOfPages = totalNumberOfPages;
@@ -25,11 +25,12 @@ public class VirtualMemory {
 
     private void generatePages() {
         for(int i = 0; i < totalNumberOfPages; i++){
-            char ch;
+            char ch = 'a' - 1;
             do{
-                ch = (char)(rand.nextInt(33,127));
-                //ch = (char)(rand.nextInt(Character.MAX_VALUE));
-                //ch = (char)(rand.nextInt(totalNumberOfPages) + '0');
+                //ch = (char)(rnd.nextInt(33,127));
+                //ch = (char)(rnd.nextInt(Character.MAX_VALUE));
+                //ch = (char)(rnd.nextInt(totalNumberOfPages) + '0');
+                ch += 1;
             } while(used.contains(ch) || isInvalid(ch));
 
             pageArray[i] = new Page(ch);
@@ -46,11 +47,33 @@ public class VirtualMemory {
     public void generateRandomReferenceString(int stringLength){
         referenceString = new Page[stringLength];
 
-        for(int i = 0; i < referenceString.length; i++){
-            referenceString[i] = pageArray[rand.nextInt(pageArray.length)];
+        for(int i = 0; i < stringLength; i++){
+            referenceString[i] = pageArray[rnd.nextInt(pageArray.length)];
         }
 
         //referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5'),};
+    }
+
+    public void generateReferenceStringWithLocality(int stringLength){
+        referenceString = new Page[stringLength];
+        int approxNumberOfLocalities = 6;
+
+        int nextLocalitySwitch = stringLength / approxNumberOfLocalities;
+        int radius = 2;
+        int mid = rnd.nextInt(pageArray.length - radius);
+
+        int origin = Math.max(0, mid-radius);
+        int bound = Math.min(mid+radius+1, pageArray.length);
+
+        for(int i = 0; i < stringLength; i++){
+            if(i == nextLocalitySwitch){
+                mid = rnd.nextInt(pageArray.length - radius);
+                origin = Math.max(0, mid-radius);
+                bound = mid+radius+1;
+                nextLocalitySwitch += rnd.nextInt(stringLength / approxNumberOfLocalities);
+            }
+            referenceString[i] = pageArray[rnd.nextInt(origin, bound)];
+        }
     }
 
     public int size() {
