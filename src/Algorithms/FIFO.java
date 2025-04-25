@@ -14,14 +14,15 @@ public class FIFO extends Algorithm {
 
     public FIFO(boolean print) {
         super(print);
+        name = "FIFO";
     }
 
     @Override
     public void run(Page[] referenceString, PhysicalMemory memory) {
         memory.clear();
         if(print){
-            System.out.println("(FIFO) Run");
-            System.out.println("(FIFO) Reference string: " + Arrays.toString(referenceString));
+            System.out.printf("(%s) Run\n", name);
+            System.out.printf("(%s) Reference string: " + Arrays.toString(referenceString) + "\n", name);
         }
 
         for(int i = 0; i < referenceString.length; i++){
@@ -29,17 +30,17 @@ public class FIFO extends Algorithm {
 
             if(print){
                 System.out.println();
-                System.out.println("(FIFO) Iteration: " + i);
-                System.out.println("(FIFO) " + memory);
-                //System.out.println("(FIFO) " + history);
-                System.out.println("(FIFO) Current page: " + currentPage);
+                System.out.printf("(%s) Iteration: " + i + "\n", name);
+                System.out.printf("(%s) " + memory + "\n", name);
+                //System.out.print("(%s) " + history + "\n", name);
+                System.out.printf("(%s) Current page: " + currentPage + "\n", name);
             }
 
             int index = memory.indexOfPage(currentPage);
 
             if(index == -1){
                 if(print){
-                    System.out.println("(FIFO) Page fault");
+                    System.out.printf("(%s) Page fault\n", name);
                 }
                 pageFaultCount++;
 
@@ -48,7 +49,7 @@ public class FIFO extends Algorithm {
 
                 if(index == -1){
                     Frame replacementFrame = history.poll();
-                    assert replacementFrame != null: "(FIFO) Replacement frame is null";
+                    assert replacementFrame != null: "(%s) Replacement frame is null\n".formatted(name);
                     replacementFrame.setPage(currentPage);
                     history.add(replacementFrame);
                 }
@@ -59,7 +60,7 @@ public class FIFO extends Algorithm {
             }
             else{
                 if(print){
-                    System.out.println("(FIFO) Page OK");
+                    System.out.printf("(%s) Page OK\n", name);
                 }
             }
 

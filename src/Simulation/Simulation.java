@@ -17,7 +17,13 @@ public class Simulation {
     public Simulation(
             int numberOfFrames,
             int totalNumberOfPages,
-            int referenceStringLength
+            int referenceStringLength,
+
+            boolean printFIFO,
+            boolean printRAND,
+            boolean printOPT,
+            boolean printLRU,
+            boolean printALRU
     ) {
         this.numberOfFrames = numberOfFrames;
         this.totalNumberOfPages = totalNumberOfPages;
@@ -26,11 +32,15 @@ public class Simulation {
         virtualMemory = new VirtualMemory(totalNumberOfPages);
         physicalMemory = new PhysicalMemory(numberOfFrames);
 
-        fifo = new FIFO(true);
+        fifo = new FIFO(printFIFO);
     }
 
     public void start(){
         virtualMemory.generateRandomReferenceString(referenceStringLength);
         fifo.run(virtualMemory.getReferenceString(), physicalMemory);
+    }
+
+    public void printStatistics() {
+        fifo.printStatistics();
     }
 }
