@@ -1,56 +1,56 @@
 package Memory.VirtualMemory;
 
-import Memory.Process;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class VirtualMemory {
-    // size
-    private final int totalNumberOfPages;
+    private static final ArrayList<Character> used = new ArrayList<>();
 
+    private final int totalNumberOfPages;
     private final Page[] pageArray;
 
-    private final int numberOfProcesses;
-    private final Process[] processArray;
+    private final Random rand = new Random();
 
-    public VirtualMemory(int totalNumberOfPages, int numberOfProcesses) {
+    public VirtualMemory(int totalNumberOfPages) {
         this.totalNumberOfPages = totalNumberOfPages;
-        this.numberOfProcesses = numberOfProcesses;
-        processArray = new Process[numberOfProcesses];
-
-        assert numberOfProcesses == 1;
-        generateSingleProcess(totalNumberOfPages);
-
         pageArray = new Page[totalNumberOfPages];
-        int[] memoryReferences = processArray[0].getMemoryReferences();
-        for(int i = 0; i < memoryReferences.length; i++) {
-            pageArray[i] = new Page(memoryReferences[i]);
+
+        for(int i = 0; i < totalNumberOfPages; i++){
+            char ch;
+            do{
+                ch = (char)(rand.nextInt(Character.MAX_VALUE));
+            } while(used.contains(ch));
+
+            pageArray[i] = new Page(ch);
+            used.add(ch);
         }
     }
 
-    public VirtualMemory(int totalNumberOfPages) {
-        this(totalNumberOfPages,1);
+    public Page[] generateRandomReferenceString(int stringLength){
+
+        Page[] referenceString = new Page[stringLength];
+
+        for(int i = 0; i < referenceString.length; i++){
+            referenceString[i] = pageArray[rand.nextInt(pageArray.length)];
+        }
+
+        return referenceString;
     }
 
-    public void generateSingleProcess(int totalNumberOfPages) {
-        processArray[0] = new Process(totalNumberOfPages);
-        processArray[0].generateRandomReferences(0,totalNumberOfPages);
-    }
-
-    public void generateProcesses() {
-        throw new UnsupportedOperationException();
-//        if(numberOfProcesses == 1) {
-//            generateSingleProcess();
+//    public void addProcess(Process process){
+//        char[] memoryReferences = process.getMemoryReferences();
+//        for(int i = 0; i < memoryReferences.length; i++){
+//            pageArray[i] = new Page(memoryReferences[i]);
 //        }
-    }
+//    }
 
     public int getTotalNumberOfPages() {
         return totalNumberOfPages;
     }
 
-    public int getNumberOfProcesses() {
-        return numberOfProcesses;
+    public Page[] getPageArray() {
+        return pageArray;
     }
 
-    public Process[] getProcessArray() {
-        return processArray;
-    }
+
 }
