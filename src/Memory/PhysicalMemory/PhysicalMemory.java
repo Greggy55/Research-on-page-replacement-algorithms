@@ -70,7 +70,7 @@ public class PhysicalMemory {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("PhysicalMemory:");
-        int i = 22;
+        int i = 28;
         for(Frame frame : frameArray){
             frame.setColorCode(i++);
             builder.append(" ").append(frame);

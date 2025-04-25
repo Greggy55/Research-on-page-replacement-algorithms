@@ -26,6 +26,8 @@ public class RAND extends Algorithm {
         }
         else{
             memory.set(index, currentPage);
+
+            printReplacementFrame(null);
         }
     }
 }

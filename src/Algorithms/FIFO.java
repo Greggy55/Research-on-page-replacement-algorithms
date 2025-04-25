@@ -32,9 +32,7 @@ public class FIFO extends Algorithm {
             memory.set(index, currentPage);
             history.add(memory.getFrame(index));
 
-            if(print){
-                System.out.printf("(%s) Replacement frame: Empty frame\n", name);
-            }
+            printReplacementFrame(null);
         }
     }
 }
