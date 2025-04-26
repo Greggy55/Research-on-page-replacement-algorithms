@@ -12,7 +12,7 @@ public abstract class Algorithm {
     public static final String ANSI_GRAY = "\u001B[38;5;244m";
 
     protected int pageFaultCount = 0;
-    protected int thrashingCount = 0;
+    protected int totalThrashingTime = 0;
     protected boolean pageFaultInPreviousPage = false;
 
     protected String name;
@@ -79,7 +79,7 @@ public abstract class Algorithm {
 
     private void checkIfTrashingHappened() {
         if(pageFaultInPreviousPage){
-            thrashingCount++;
+            totalThrashingTime++;
         }
         else{
             pageFaultInPreviousPage = true;
@@ -95,7 +95,7 @@ public abstract class Algorithm {
         System.out.println();
         System.out.printf("%s %s %s\n", "-".repeat(dashes), name, "-".repeat(dashes - name.length() + ANSI_GRAY.length() + ANSI_RESET.length() + dashes/3));
         System.out.printf("Page fault count: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, pageFaultCount);
-        System.out.printf("Trashing count: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, thrashingCount);
+        System.out.printf("Total trashing time: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, totalThrashingTime);
     }
 
     public void printReplacementFrame(Frame replacementFrame) {
