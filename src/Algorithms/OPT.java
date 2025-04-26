@@ -43,26 +43,37 @@ public class OPT extends Algorithm {
         }
 
         for(int i = iter + 1; i < referenceString.length; i++){
-            if(!currentPage.sameIdAs(referenceString[i])){
-                if(memory.containsPage(referenceString[i])){
-                    int j;
-                    for(j = 0; j < future.size(); j++){
-                        if(future.get(j).sameIdAs(referenceString[i])){
-                            break;
-                        }
-                    }
-                    if(j == future.size()){
-                        future.add(referenceString[i]);
-                    }
+            Page futureReference = referenceString[i];
+
+            if(futureReferenceIsInPhysicalMemory(futureReference)){
+                if (futureDoesNotContain(futureReference)) {
+                    future.add(futureReference);
                 }
             }
-            if(memory.size() == future.size()){
+
+            if(allFutureReferencesHaveBeenChecked()){
                 break;
             }
         }
 
         assert memory.getFrame(future.getLast()) != null: "(%s) Frame is null\n".formatted(name);
         return memory.getFrame(future.getLast());
+    }
+
+    private boolean allFutureReferencesHaveBeenChecked() {
+        return memory.size() == future.size();
+    }
+
+    private boolean futureDoesNotContain(Page futureReference) {
+        return future.stream().noneMatch(p -> p.sameIdAs(futureReference));
+    }
+
+    private boolean futureReferenceIsInPhysicalMemory(Page futureReference) {
+        return memory.containsPage(futureReference);
+    }
+
+    private boolean futureReferenceIsDifferentFromCurrentPage(Page futureReference) {
+        return !currentPage.sameIdAs(futureReference);
     }
 
     public boolean referenceIsInTheFuture(){

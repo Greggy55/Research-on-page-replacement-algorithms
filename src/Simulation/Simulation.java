@@ -54,8 +54,8 @@ public class Simulation {
     }
 
     public void start(){
-        generateReferenceString();
-        //virtualMemory.generateExampleReferenceString();
+        //generateReferenceString();
+        virtualMemory.generateExampleReferenceString();
 
         fifo.run(virtualMemory.getReferenceString());
         rand.run(virtualMemory.getReferenceString());

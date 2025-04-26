@@ -57,7 +57,8 @@ public class VirtualMemory {
     }
 
     public void generateExampleReferenceString() {
-        referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5'),};
+        referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5')};
+        //referenceString = new Page[]{new Page('1'), new Page('1'), new Page('2'), new Page('2'), new Page('3'), new Page('3'), new Page('4'), new Page('4'), new Page('5'), new Page('5'), new Page('1'), new Page('2')};
     }
 
     public void generateRandomReferenceString(int stringLength){
