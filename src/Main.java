@@ -14,7 +14,7 @@ public class Main {
         // 4 5 12
 
         int localityLevel = 10;
-        double localityFactor = 1.0;
+        double localityFactor = 0.8;
 
         boolean printFIFO = true;
         boolean printRAND = true;
