@@ -81,7 +81,7 @@ public class VirtualMemory {
 
         for(int i = 0; i < stringLength; i++){
             if(localityFactor > rnd.nextDouble()){
-                if(i == nextLocalitySwitch){
+                if(i >= nextLocalitySwitch){
                     mid = rnd.nextInt(pageArray.length - radius);
                     origin = Math.max(0, mid-radius);
                     bound = mid+radius+1;

@@ -13,7 +13,7 @@ public class Main {
         int referenceStringLength = 100;
         // 4 5 12
 
-        int localityLevel = 15;
+        int localityLevel = 10;
         double localityFactor = 1.0;
 
         boolean printFIFO = true;
