@@ -1,9 +1,6 @@
 package Simulation;
 
-import Algorithms.FIFO;
-import Algorithms.LRU;
-import Algorithms.OPT;
-import Algorithms.RAND;
+import Algorithms.*;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.VirtualMemory;
 
@@ -25,6 +22,7 @@ public class Simulation {
     private RAND rand;
     private OPT opt;
     private LRU lru;
+    private ALRU aLru;
 
     public Simulation(
             int numberOfFrames,
@@ -54,6 +52,7 @@ public class Simulation {
         rand = new RAND(printRAND, physicalMemory);
         opt = new OPT(printOPT, physicalMemory);
         lru = new LRU(printLRU, physicalMemory);
+        aLru = new ALRU(printALRU, physicalMemory);
     }
 
     public void start(){
@@ -64,6 +63,7 @@ public class Simulation {
         rand.run(virtualMemory.getReferenceString());
         opt.run(virtualMemory.getReferenceString());
         lru.run(virtualMemory.getReferenceString());
+        aLru.run(virtualMemory.getReferenceString());
     }
 
     public void generateReferenceString(){
@@ -88,5 +88,6 @@ public class Simulation {
         rand.printStatistics();
         opt.printStatistics();
         lru.printStatistics();
+        aLru.printStatistics();
     }
 }

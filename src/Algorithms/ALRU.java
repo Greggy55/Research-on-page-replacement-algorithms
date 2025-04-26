@@ -2,28 +2,50 @@ package Algorithms;
 
 import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
+import Memory.VirtualMemory.Page;
 
-public class ALRU extends LRU {
+public class ALRU extends Algorithm {
     public ALRU(boolean print, PhysicalMemory memory) {
         super(print, memory);
         name = ANSI_GRAY + "aLRU" + ANSI_RESET;
     }
 
     @Override
-    public Frame searchForFrameWithLeastRecentlyUsedPage() {
-        Frame[] frames = memory.getFrameArray();
-        Frame resultFrame = frames[0];
-        int resultFrameLastReference = lastReference.get(resultFrame.getPage());
+    public void replacePage() {
+        int index = memory.findEmptyFrame();
 
-        for(Frame frame : frames){
-            int currentFrameLastReference = lastReference.get(frame.getPage());
+        if(index == -1){
+            Frame replacementFrame = searchForFrameWithZeroReferenceBit();
+            printReplacementFrame(replacementFrame);
 
-            if(currentFrameLastReference > resultFrameLastReference){
-                resultFrame = frame;
-                resultFrameLastReference = currentFrameLastReference;
+            assert replacementFrame != null: "(%s) Replacement frame is null\n".formatted(name);
+            replacementFrame.setPage(currentPage);
+
+            lastReference.put(currentPage, 1);
+        }
+        else{
+            memory.set(index, currentPage);
+            lastReference.put(currentPage, 1);
+
+            printReplacementFrame(null);
+        }
+    }
+
+    private Frame searchForFrameWithZeroReferenceBit() {
+        while(true){
+            for(Page key : lastReference.keySet()){
+                if(lastReference.get(key) == 1){
+                    lastReference.put(key, 0);
+                }
+                else if(lastReference.get(key) == 0){
+                    Frame frame = memory.getFrame(key);
+                    lastReference.remove(key);
+                    return frame;
+                }
+                else{
+                    throw new IllegalStateException("Reference bit is not 0 or 1");
+                }
             }
         }
-
-        return resultFrame;
     }
 }

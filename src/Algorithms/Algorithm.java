@@ -45,6 +45,7 @@ public abstract class Algorithm {
         }
 
         for(iter = 0; iter < referenceString.length; iter++){
+            System.out.println(lastReference);
             currentPage = referenceString[iter];
             if(this instanceof LRU){
                 ((LRU) this).updateLastReference();

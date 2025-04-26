@@ -46,7 +46,7 @@ public class LRU extends Algorithm {
     }
 
     public void updateLastReference(){
-        lastReference.replaceAll((k, v) -> lastReference.get(k) + 1);
+        lastReference.replaceAll((k, v) -> v + 1);
         lastReference.put(currentPage, 0);
     }
 }
