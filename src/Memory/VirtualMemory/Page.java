@@ -1,6 +1,8 @@
 package Memory.VirtualMemory;
 
 public class Page {
+    public static final boolean COLOR = false;
+
     public static final String ANSI_RESET = "\u001B[0m";
     private static final int BEGIN_COLOR_CODE = 17;
     private static int globalColorCode = BEGIN_COLOR_CODE;
@@ -24,6 +26,10 @@ public class Page {
 
     @Override
     public String toString() {
+        if(!COLOR){
+            return idToString();
+        }
+
         if(isInt){
             return ansi256(colorCode) + idInt + ANSI_RESET;
         }
