@@ -2,11 +2,13 @@ package Algorithms;
 
 import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
+import Memory.VirtualMemory.Page;
 
 public class LRU extends Algorithm {
 
     public LRU(boolean print, PhysicalMemory memory) {
         super(print, memory);
+        name = ANSI_GRAY + "LRU" + ANSI_RESET;
     }
 
     @Override
@@ -28,6 +30,19 @@ public class LRU extends Algorithm {
     }
 
     public Frame searchForFrameWithLeastRecentlyUsedPage() {
-        return new Frame();
+        Frame[] frames = memory.getFrameArray();
+        Frame resultFrame = frames[0];
+        int resultFrameLastReference = lastReference.get(resultFrame.getPage());
+
+        for(Frame frame : frames){
+            int currentFrameLastReference = lastReference.get(frame.getPage());
+
+            if(currentFrameLastReference > resultFrameLastReference){
+                resultFrame = frame;
+                resultFrameLastReference = currentFrameLastReference;
+            }
+        }
+
+        return resultFrame;
     }
 }

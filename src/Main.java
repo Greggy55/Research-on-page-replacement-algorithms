@@ -16,8 +16,8 @@ public class Main {
 
         boolean printFIFO = false;
         boolean printRAND = false;
-        boolean printOPT = true;
-        boolean printLRU = false;
+        boolean printOPT = false;
+        boolean printLRU = true;
         boolean printALRU = false;
 
         Simulation simulation = new Simulation(
