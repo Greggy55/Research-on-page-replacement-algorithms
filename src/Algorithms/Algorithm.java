@@ -28,10 +28,11 @@ public abstract class Algorithm {
         this.memory = memory;
     }
 
-    public abstract void replacePage();
+    public abstract void replacePage(Page[] referenceString, int iteration);
 
     public void run(Page[] referenceString){
         memory.clear();
+
         if(print){
             System.out.printf("%s Run\n", name);
         }
@@ -54,7 +55,7 @@ public abstract class Algorithm {
 
                 checkIfTrashingHappened();
 
-                replacePage();
+                replacePage(referenceString, i);
             }
             else{
                 if(print){

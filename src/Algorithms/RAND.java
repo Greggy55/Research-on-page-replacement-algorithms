@@ -2,6 +2,7 @@ package Algorithms;
 
 import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
+import Memory.VirtualMemory.Page;
 
 import java.util.Random;
 
@@ -14,7 +15,7 @@ public class RAND extends Algorithm {
     }
 
     @Override
-    public void replacePage() {
+    public void replacePage(Page[] rs, int it) {
         int index = memory.findEmptyFrame();
 
         if(index == -1){

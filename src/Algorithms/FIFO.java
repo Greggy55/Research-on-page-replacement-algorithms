@@ -17,7 +17,7 @@ public class FIFO extends Algorithm {
     }
 
     @Override
-    public void replacePage() {
+    public void replacePage(Page[] rs, int it) {
         int index = memory.findEmptyFrame();
 
         if(index == -1){

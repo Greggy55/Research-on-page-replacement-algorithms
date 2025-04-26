@@ -62,6 +62,21 @@ public class PhysicalMemory {
         return frameArray[index];
     }
 
+    public boolean containsPage(Page page) {
+        return getFrame(page) != null;
+    }
+
+    public Frame getFrame(Page page) {
+        for(int i = 0; i < numberOfFrames; i++){
+            if(frameArray[i].containsPage()){
+                if(page.sameIdAs(frameArray[i].getPage())){
+                    return frameArray[i];
+                }
+            }
+        }
+        return null;
+    }
+
     public void set(int index, Page page){
         frameArray[index].setPage(page);
     }
