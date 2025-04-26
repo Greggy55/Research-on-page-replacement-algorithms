@@ -11,8 +11,8 @@ public class FIFO extends Algorithm {
 
     private Queue<Frame> history = new LinkedList<>();
 
-    public FIFO(boolean print, PhysicalMemory memory) {
-        super(print, memory);
+    public FIFO(boolean print, boolean printDetails, PhysicalMemory memory) {
+        super(print, printDetails, memory);
         name = ANSI_GRAY + "FIFO" + ANSI_RESET;
     }
 
@@ -33,6 +33,10 @@ public class FIFO extends Algorithm {
             history.add(memory.getFrame(index));
 
             printReplacementFrame(null);
+        }
+
+        if(print && printDetails) {
+            System.out.printf("%s History:\t" + history + "\n", name);
         }
     }
 }

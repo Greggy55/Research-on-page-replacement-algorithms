@@ -11,8 +11,8 @@ public class ALRU extends Algorithm {
 
     Queue<Page> queue = new LinkedList<>();
 
-    public ALRU(boolean print, PhysicalMemory memory) {
-        super(print, memory);
+    public ALRU(boolean print, boolean printDetails, PhysicalMemory memory) {
+        super(print, printDetails, memory);
         name = ANSI_GRAY + "aLRU" + ANSI_RESET;
     }
 
@@ -38,7 +38,7 @@ public class ALRU extends Algorithm {
 
         queue.add(currentPage);
 
-        if(print){
+        if(print && printDetails) {
             System.out.printf("%s FIFO queue after:\t" + queue + "\n", name);
             System.out.printf("%s Reference bits:\t" + lastReference + "\n", name);
         }

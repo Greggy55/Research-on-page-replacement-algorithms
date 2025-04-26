@@ -19,6 +19,7 @@ public abstract class Algorithm {
 
     protected String name;
     protected boolean print;
+    protected boolean printDetails;
 
     protected Page[] referenceString;
     protected PhysicalMemory memory;
@@ -29,8 +30,9 @@ public abstract class Algorithm {
 
     protected int iter;
 
-    public Algorithm(boolean print, PhysicalMemory memory){
+    public Algorithm(boolean print, boolean printDetails, PhysicalMemory memory){
         this.print = print;
+        this.printDetails = printDetails;
         this.memory = memory;
     }
 
@@ -45,7 +47,6 @@ public abstract class Algorithm {
         }
 
         for(iter = 0; iter < referenceString.length; iter++){
-            //System.out.println(lastReference);
             currentPage = referenceString[iter];
             if(this instanceof LRU){
                 ((LRU) this).updateLastReference();

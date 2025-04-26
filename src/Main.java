@@ -20,6 +20,8 @@ public class Main {
         boolean printLRU = true;
         boolean printALRU = true;
 
+        boolean printDetails = false;
+
         Simulation simulation = new Simulation(
                 numberOfFrames,
                 totalNumberOfPages,
@@ -32,7 +34,9 @@ public class Main {
                 printRAND,
                 printOPT,
                 printLRU,
-                printALRU
+                printALRU,
+
+                printDetails
         );
 
         simulation.start();

@@ -2,15 +2,14 @@ package Algorithms;
 
 import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
-import Memory.VirtualMemory.Page;
 
 import java.util.Random;
 
 public class RAND extends Algorithm {
     private final Random rnd = new Random();
 
-    public RAND(boolean print, PhysicalMemory memory) {
-        super(print, memory);
+    public RAND(boolean print, boolean printDetails, PhysicalMemory memory) {
+        super(print, printDetails, memory);
         name = ANSI_GRAY + "RAND" + ANSI_RESET;
     }
 

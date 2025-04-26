@@ -10,8 +10,8 @@ public class OPT extends Algorithm {
 
     private ArrayList<Page> future = new ArrayList<>();
 
-    public OPT(boolean print, PhysicalMemory memory) {
-        super(print, memory);
+    public OPT(boolean print, boolean printDetails, PhysicalMemory memory) {
+        super(print, printDetails, memory);
         name = ANSI_GRAY + "OPT" + ANSI_RESET;
     }
 
@@ -30,6 +30,10 @@ public class OPT extends Algorithm {
             memory.set(index, currentPage);
 
             printReplacementFrame(null);
+        }
+
+        if(print && printDetails){
+            System.out.printf("%s Future:\t" + future + "\n", name);
         }
     }
 

@@ -36,7 +36,9 @@ public class Simulation {
             boolean printRAND,
             boolean printOPT,
             boolean printLRU,
-            boolean printALRU
+            boolean printALRU,
+
+            boolean printDetails
     ) {
         this.numberOfFrames = numberOfFrames;
         this.totalNumberOfPages = totalNumberOfPages;
@@ -48,11 +50,11 @@ public class Simulation {
         virtualMemory = new VirtualMemory(totalNumberOfPages);
         physicalMemory = new PhysicalMemory(numberOfFrames);
 
-        fifo = new FIFO(printFIFO, physicalMemory);
-        rand = new RAND(printRAND, physicalMemory);
-        opt = new OPT(printOPT, physicalMemory);
-        lru = new LRU(printLRU, physicalMemory);
-        aLru = new ALRU(printALRU, physicalMemory);
+        fifo = new FIFO(printFIFO, printDetails, physicalMemory);
+        rand = new RAND(printRAND, printDetails, physicalMemory);
+        opt = new OPT(printOPT, printDetails, physicalMemory);
+        lru = new LRU(printLRU, printDetails, physicalMemory);
+        aLru = new ALRU(printALRU, printDetails, physicalMemory);
     }
 
     public void start(){

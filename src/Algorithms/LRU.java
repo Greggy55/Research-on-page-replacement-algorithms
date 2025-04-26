@@ -5,8 +5,8 @@ import Memory.PhysicalMemory.PhysicalMemory;
 
 public class LRU extends Algorithm {
 
-    public LRU(boolean print, PhysicalMemory memory) {
-        super(print, memory);
+    public LRU(boolean print, boolean printDetails, PhysicalMemory memory) {
+        super(print, printDetails, memory);
         name = ANSI_GRAY + "LRU" + ANSI_RESET;
     }
 
@@ -27,7 +27,7 @@ public class LRU extends Algorithm {
             printReplacementFrame(null);
         }
 
-        if(print){
+        if(print && printDetails) {
             System.out.printf("%s Last reference:\t" + lastReference + "\n", name);
         }
     }
