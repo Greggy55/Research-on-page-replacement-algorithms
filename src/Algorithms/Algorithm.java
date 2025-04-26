@@ -43,7 +43,7 @@ public abstract class Algorithm {
                 System.out.println();
                 System.out.printf("%s Iteration: " + ANSI_YELLOW + i + ANSI_RESET + "\n", name);
                 System.out.printf("%s " + memory + "\n", name);
-                System.out.printf("%s Current page: " + ANSI_YELLOW + currentPage + ANSI_RESET + "\n", name);
+                System.out.printf("%s Current page: " + ANSI_YELLOW + currentPage.idToString() + ANSI_RESET + "\n", name);
             }
 
             if(pageFault()){
@@ -73,16 +73,16 @@ public abstract class Algorithm {
         }
     }
 
+    public boolean pageFault() {
+        return memory.indexOfPage(currentPage) == -1;
+    }
+
     public void printStatistics() {
         final int dashes = 15;
         System.out.println();
         System.out.printf("%s %s %s\n", "-".repeat(dashes), name, "-".repeat(dashes - name.length() + ANSI_GRAY.length() + ANSI_RESET.length() + dashes/3));
         System.out.printf("Page fault count: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, pageFaultCount);
         System.out.printf("Trashing count: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, thrashingCount);
-    }
-
-    public boolean pageFault() {
-        return memory.indexOfPage(currentPage) == -1;
     }
 
     public void printReplacementFrame(Frame replacementFrame) {

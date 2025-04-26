@@ -43,7 +43,7 @@ public class Frame {
 
     @Override
     public String toString() {
-        return ansi256(colorCode) + "|" + (!containsPage ? " " : page) + "|" + ANSI_RESET;
+        return ansi256(colorCode) + "|" + (!containsPage ? " " : page.idToString()) + "|" + ANSI_RESET;
     }
 
     public int getColorCode() {
