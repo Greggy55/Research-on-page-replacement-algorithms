@@ -34,7 +34,6 @@ public abstract class Algorithm {
         memory.clear();
         if(print){
             System.out.printf("%s Run\n", name);
-            System.out.printf("%s Reference string: " + ANSI_YELLOW + Arrays.toString(referenceString) + ANSI_RESET + "\n", name);
         }
 
         for(int i = 0; i < referenceString.length; i++){

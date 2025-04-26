@@ -5,6 +5,8 @@ import Algorithms.RAND;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.VirtualMemory;
 
+import java.util.Arrays;
+
 public class Simulation {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[38;5;228m";
@@ -49,6 +51,8 @@ public class Simulation {
     }
 
     public void printParameters(){
+        System.out.println("Pages: " + ANSI_YELLOW + virtualMemory.pagesToString() + ANSI_RESET);
+        System.out.println("Reference string: " + ANSI_YELLOW + virtualMemory.referenceStringToString() + ANSI_RESET);
         System.out.println("Number of frames: " + ANSI_YELLOW + numberOfFrames + ANSI_RESET);
         System.out.println("Total number of pages: " + ANSI_YELLOW + totalNumberOfPages + ANSI_RESET);
         System.out.println("Reference string length: " + ANSI_YELLOW + referenceStringLength + ANSI_RESET);

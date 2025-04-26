@@ -34,25 +34,22 @@ public class VirtualMemory {
         for(int i = 0; i < totalNumberOfPages; i++){
             pageArray[i] = new Page(i+1);
         }
-        System.out.println("Pages: " + Arrays.toString(pageArray));
-        System.out.println();
     }
 
     private void generateCharPages() {
+        char ch = (char) rnd.nextInt(33, Character.MAX_VALUE);
         for(int i = 0; i < totalNumberOfPages; i++){
-            char ch = 'a' - 1;
             do{
                 //ch = (char)(rnd.nextInt(33,127));
                 //ch = (char)(rnd.nextInt(Character.MAX_VALUE));
                 //ch = (char)(rnd.nextInt(totalNumberOfPages) + '0');
-                ch += 1;
+                ch++;
+                ch %= Character.MAX_VALUE;
             } while(used.contains(ch) || isInvalid(ch));
 
             pageArray[i] = new Page(ch);
             used.add(ch);
         }
-        System.out.println("Pages: " + Arrays.toString(pageArray));
-        System.out.println();
     }
 
     private static boolean isInvalid(char ch) {
@@ -101,5 +98,13 @@ public class VirtualMemory {
 
     public Page[] getReferenceString() {
         return referenceString;
+    }
+
+    public String pagesToString(){
+        return Arrays.toString(pageArray);
+    }
+
+    public String referenceStringToString(){
+        return Arrays.toString(referenceString);
     }
 }
