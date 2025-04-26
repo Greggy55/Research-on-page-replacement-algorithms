@@ -56,14 +56,16 @@ public class VirtualMemory {
         return !Character.isDefined(ch) || Character.isISOControl(ch) || Character.isSurrogate(ch) || ch == '⯔';
     }
 
+    public void generateExampleReferenceString() {
+        referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5'),};
+    }
+
     public void generateRandomReferenceString(int stringLength){
         referenceString = new Page[stringLength];
 
         for(int i = 0; i < stringLength; i++){
             referenceString[i] = pageArray[rnd.nextInt(pageArray.length)];
         }
-
-        //referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5'),};
     }
 
     public void generateReferenceStringWithLocality(int stringLength, int approxNumberOfLocalities, double localityFactor){

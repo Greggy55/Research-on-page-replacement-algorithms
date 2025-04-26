@@ -4,8 +4,6 @@ import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
-import java.util.Arrays;
-
 public abstract class Algorithm {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -15,6 +13,8 @@ public abstract class Algorithm {
 
     protected int pageFaultCount = 0;
     protected int thrashingCount = 0;
+    protected boolean pageFaultInPreviousPage = false;
+
     protected String name;
     protected boolean print;
 
@@ -52,12 +52,16 @@ public abstract class Algorithm {
                 }
                 pageFaultCount++;
 
+                checkIfTrashingHappened();
+
                 replacePage();
             }
             else{
                 if(print){
                     System.out.printf("%s Page " + ANSI_GREEN + "OK\n" + ANSI_RESET, name);
                 }
+
+                pageFaultInPreviousPage = false;
             }
 
         }
@@ -70,6 +74,15 @@ public abstract class Algorithm {
             System.out.println();
             System.out.println("-".repeat(100));
             System.out.println();
+        }
+    }
+
+    private void checkIfTrashingHappened() {
+        if(pageFaultInPreviousPage){
+            thrashingCount++;
+        }
+        else{
+            pageFaultInPreviousPage = true;
         }
     }
 

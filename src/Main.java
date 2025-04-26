@@ -3,16 +3,15 @@ import Simulation.Simulation;
 public class Main {
     public static void main(String[] args) {
 
-        int numberOfFrames = 40;
+        int numberOfFrames = 20;
         int totalNumberOfPages = numberOfFrames * 2;
-        //int totalNumberOfPages = numberOfFrames / 2;
         int referenceStringLength = 100;
 
-        int localityLevel = 10;
-        double localityFactor = 0.8;
+        int localityLevel = 0;
+        double localityFactor = 1.0;
 
-        boolean printFIFO = false;
-        boolean printRAND = false;
+        boolean printFIFO = true;
+        boolean printRAND = true;
         boolean printOPT = false;
         boolean printLRU = false;
         boolean printALRU = false;
