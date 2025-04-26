@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class VirtualMemory {
+    private static final boolean INT_TYPE = true;
+
     private static final ArrayList<Character> used = new ArrayList<>();
     private static final char emptyChar = ' ';
 
@@ -20,10 +22,23 @@ public class VirtualMemory {
         pageArray = new Page[totalNumberOfPages];
         used.add(emptyChar);
 
-        generatePages();
+        if(INT_TYPE){
+            generateIntPages();
+        }
+        else{
+            generateCharPages();
+        }
     }
 
-    private void generatePages() {
+    private void generateIntPages() {
+        for(int i = 0; i < totalNumberOfPages; i++){
+            pageArray[i] = new Page(i+1);
+        }
+        System.out.println("Pages: " + Arrays.toString(pageArray));
+        System.out.println();
+    }
+
+    private void generateCharPages() {
         for(int i = 0; i < totalNumberOfPages; i++){
             char ch = 'a' - 1;
             do{
