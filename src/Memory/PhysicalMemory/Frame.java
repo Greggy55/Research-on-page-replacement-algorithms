@@ -3,7 +3,11 @@ package Memory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
 public class Frame {
+    public static boolean COLOR = false;
+
     public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_YELLOW = "\u001B[38;5;228m";
+
     private int colorCode = 0;
 
     private Page page;
@@ -55,6 +59,6 @@ public class Frame {
     }
 
     public static String ansi256(int code) {
-        return "\u001B[38;5;" + code + "m";
+        return COLOR ? "\u001B[38;5;" + code + "m" : ANSI_YELLOW;
     }
 }

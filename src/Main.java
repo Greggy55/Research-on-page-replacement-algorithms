@@ -1,17 +1,19 @@
+import Memory.PhysicalMemory.Frame;
+import Memory.VirtualMemory.Page;
 import Simulation.Simulation;
 
 public class Main {
     public static void main(String[] args) {
 
-        int numberOfFrames = 4;
-        int totalNumberOfPages = 5;
-        int referenceStringLength = 12;
+        Frame.COLOR = true;
+        Page.COLOR = true;
 
-//        int numberOfFrames = 5;
-//        int totalNumberOfPages = 10;
-//        int referenceStringLength = 40;
+        int numberOfFrames = 20;
+        int totalNumberOfPages = 40;
+        int referenceStringLength = 100;
+        // 4 5 12
 
-        int localityLevel = 0;
+        int localityLevel = 15;
         double localityFactor = 1.0;
 
         boolean printFIFO = true;
