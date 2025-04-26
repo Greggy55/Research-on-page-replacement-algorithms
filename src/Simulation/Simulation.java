@@ -1,6 +1,7 @@
 package Simulation;
 
 import Algorithms.FIFO;
+import Algorithms.OPT;
 import Algorithms.RAND;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.VirtualMemory;
@@ -21,6 +22,7 @@ public class Simulation {
 
     private FIFO fifo;
     private RAND rand;
+    private OPT opt;
 
     public Simulation(
             int numberOfFrames,
@@ -48,14 +50,16 @@ public class Simulation {
 
         fifo = new FIFO(printFIFO, physicalMemory);
         rand = new RAND(printRAND, physicalMemory);
+        opt = new OPT(printOPT, physicalMemory);
     }
 
     public void start(){
-        generateReferenceString();
-        //virtualMemory.generateExampleReferenceString();
+        //generateReferenceString();
+        virtualMemory.generateExampleReferenceString();
 
         fifo.run(virtualMemory.getReferenceString());
         rand.run(virtualMemory.getReferenceString());
+        opt.run(virtualMemory.getReferenceString());
     }
 
     public void generateReferenceString(){
@@ -78,5 +82,6 @@ public class Simulation {
     public void printStatistics() {
         fifo.printStatistics();
         rand.printStatistics();
+        opt.printStatistics();
     }
 }

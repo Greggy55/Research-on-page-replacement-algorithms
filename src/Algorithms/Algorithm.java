@@ -4,6 +4,8 @@ import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
+import java.util.Arrays;
+
 public abstract class Algorithm {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -18,33 +20,37 @@ public abstract class Algorithm {
     protected String name;
     protected boolean print;
 
-    //protected Page[] referenceString;
+    protected Page[] referenceString;
     protected PhysicalMemory memory;
 
     protected Page currentPage;
+
+    protected int iter;
 
     public Algorithm(boolean print, PhysicalMemory memory){
         this.print = print;
         this.memory = memory;
     }
 
-    public abstract void replacePage(Page[] referenceString, int iteration);
+    public abstract void replacePage();
 
-    public void run(Page[] referenceString){
+    public void run(Page[] refStr){
         memory.clear();
+        referenceString = refStr;
 
         if(print){
             System.out.printf("%s Run\n", name);
         }
 
-        for(int i = 0; i < referenceString.length; i++){
-            currentPage = referenceString[i];
+        for(iter = 0; iter < referenceString.length; iter++){
+            //refresh();
+            currentPage = referenceString[iter];
 
             if(print){
                 System.out.println();
-                System.out.printf("%s Iteration: " + ANSI_YELLOW + i + ANSI_RESET + "\n", name);
+                System.out.printf("%s Iteration: " + ANSI_YELLOW + iter + ANSI_RESET + "\n", name);
                 System.out.printf("%s " + memory + "\n", name);
-                System.out.printf("%s Current page: " + ANSI_YELLOW + currentPage.idToString() + ANSI_RESET + "\n", name);
+                System.out.printf("%s Reference: " + ANSI_YELLOW + currentPage.idToString() + ANSI_RESET + "\n", name);
             }
 
             if(pageFault()){
@@ -55,7 +61,7 @@ public abstract class Algorithm {
 
                 checkIfTrashingHappened();
 
-                replacePage(referenceString, i);
+                replacePage();
             }
             else{
                 if(print){
@@ -76,6 +82,26 @@ public abstract class Algorithm {
             System.out.println("-".repeat(100));
             System.out.println();
         }
+    }
+
+    private void refresh(){
+        Frame[] frames = memory.getFrameArray();
+        for(Frame frame : frames){
+            if(frame.containsPage()){
+                if(!refStrHasReference(frame.getPage())){
+                    frame.clear();
+                }
+            }
+        }
+    }
+
+    private boolean refStrHasReference(Page page){
+        for(Page refPage : referenceString){
+            if(refPage.sameIdAs(page)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void checkIfTrashingHappened() {

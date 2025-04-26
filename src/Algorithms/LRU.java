@@ -9,7 +9,7 @@ public class LRU extends Algorithm {
     }
 
     @Override
-    public void replacePage(Page[] referenceString, int iteration) {
+    public void replacePage() {
 
     }
 }

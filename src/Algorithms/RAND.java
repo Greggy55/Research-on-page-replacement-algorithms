@@ -15,7 +15,7 @@ public class RAND extends Algorithm {
     }
 
     @Override
-    public void replacePage(Page[] rs, int it) {
+    public void replacePage() {
         int index = memory.findEmptyFrame();
 
         if(index == -1){
