@@ -14,10 +14,10 @@ public class Main {
         int localityLevel = 0;
         double localityFactor = 1.0;
 
-        boolean printFIFO = false;
-        boolean printRAND = false;
-        boolean printOPT = false;
-        boolean printLRU = false;
+        boolean printFIFO = true;
+        boolean printRAND = true;
+        boolean printOPT = true;
+        boolean printLRU = true;
         boolean printALRU = true;
 
         Simulation simulation = new Simulation(

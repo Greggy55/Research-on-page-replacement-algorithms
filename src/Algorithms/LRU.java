@@ -26,6 +26,10 @@ public class LRU extends Algorithm {
 
             printReplacementFrame(null);
         }
+
+        if(print){
+            System.out.printf("%s Last reference:\t" + lastReference + "\n", name);
+        }
     }
 
     public Frame searchForFrameWithLeastRecentlyUsedPage() {

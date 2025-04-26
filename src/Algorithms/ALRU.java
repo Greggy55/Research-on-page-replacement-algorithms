@@ -4,7 +4,13 @@ import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class ALRU extends Algorithm {
+
+    Queue<Page> queue = new LinkedList<>();
+
     public ALRU(boolean print, PhysicalMemory memory) {
         super(print, memory);
         name = ANSI_GRAY + "aLRU" + ANSI_RESET;
@@ -29,17 +35,25 @@ public class ALRU extends Algorithm {
 
             printReplacementFrame(null);
         }
+
+        queue.add(currentPage);
+
+        if(print){
+            System.out.printf("%s FIFO queue after:\t" + queue + "\n", name);
+            System.out.printf("%s Reference bits:\t" + lastReference + "\n", name);
+        }
     }
 
     private Frame searchForFrameWithZeroReferenceBit() {
         while(true){
-            for(Page key : lastReference.keySet()){
+            for(Page key : queue){
                 if(lastReference.get(key) == 1){
                     lastReference.put(key, 0);
                 }
                 else if(lastReference.get(key) == 0){
                     Frame frame = memory.getFrame(key);
                     lastReference.remove(key);
+                    queue.poll();
                     return frame;
                 }
                 else{
