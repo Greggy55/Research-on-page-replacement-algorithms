@@ -1,6 +1,6 @@
 package Memory.VirtualMemory;
 
-public class Page {
+public class Page implements Comparable<Page> {
     public static final boolean COLOR = true;
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -69,5 +69,22 @@ public class Page {
 
     public static String ansi256(int code) {
         return "\u001B[38;5;" + code + "m";
+    }
+
+    @Override
+    public int compareTo(Page p) {
+        if(isInt){
+            return Integer.compare(idInt, p.idInt);
+        }
+        return Character.compare(idChar, p.idChar);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Page){
+            Page p = (Page)obj;
+            return this.sameIdAs(p);
+        }
+        throw new IllegalStateException("Not a Page");
     }
 }

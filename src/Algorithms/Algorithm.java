@@ -4,7 +4,7 @@ import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.Page;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
 public abstract class Algorithm {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -24,6 +24,8 @@ public abstract class Algorithm {
     protected PhysicalMemory memory;
 
     protected Page currentPage;
+
+    protected HashMap<Page, Integer> lastReference = new HashMap<>();
 
     protected int iter;
 
@@ -45,6 +47,8 @@ public abstract class Algorithm {
         for(iter = 0; iter < referenceString.length; iter++){
             //refresh();
             currentPage = referenceString[iter];
+            updateLastReference();
+            System.out.println(lastReference);
 
             if(print){
                 System.out.println();
@@ -82,6 +86,11 @@ public abstract class Algorithm {
             System.out.println("-".repeat(100));
             System.out.println();
         }
+    }
+
+    private void updateLastReference(){
+        lastReference.replaceAll((k, v) -> lastReference.get(k) + 1);
+        lastReference.put(currentPage, 0);
     }
 
     private void refresh(){
