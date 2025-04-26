@@ -4,9 +4,10 @@ public class Main {
     public static void main(String[] args) {
 
         int numberOfFrames = 10;
-        //int totalNumberOfPages = 2*numberOfFrames;
-        int totalNumberOfPages = numberOfFrames/2;
+        int totalNumberOfPages = numberOfFrames * 2;
+        //int totalNumberOfPages = numberOfFrames / 2;
         int referenceStringLength = 100;
+        boolean locality = true;
 
         boolean printFIFO = true;
         boolean printRAND = true;
@@ -19,6 +20,7 @@ public class Main {
                 numberOfFrames,
                 totalNumberOfPages,
                 referenceStringLength,
+                locality,
 
                 printFIFO,
                 printRAND,

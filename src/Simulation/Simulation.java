@@ -14,6 +14,7 @@ public class Simulation {
     private final int numberOfFrames;
     private final int totalNumberOfPages;
     private final int referenceStringLength;
+    private final boolean locality;
 
     private VirtualMemory virtualMemory;
     private PhysicalMemory physicalMemory;
@@ -25,6 +26,7 @@ public class Simulation {
             int numberOfFrames,
             int totalNumberOfPages,
             int referenceStringLength,
+            boolean locality,
 
             boolean printFIFO,
             boolean printRAND,
@@ -35,6 +37,7 @@ public class Simulation {
         this.numberOfFrames = numberOfFrames;
         this.totalNumberOfPages = totalNumberOfPages;
         this.referenceStringLength = referenceStringLength;
+        this.locality = locality;
 
         virtualMemory = new VirtualMemory(totalNumberOfPages);
         physicalMemory = new PhysicalMemory(numberOfFrames);
@@ -44,10 +47,18 @@ public class Simulation {
     }
 
     public void start(){
-        //virtualMemory.generateRandomReferenceString(referenceStringLength);
-        virtualMemory.generateReferenceStringWithLocality(referenceStringLength);
+        generateReferenceString();
         fifo.run(virtualMemory.getReferenceString());
         rand.run(virtualMemory.getReferenceString());
+    }
+
+    public void generateReferenceString(){
+        if(locality){
+            virtualMemory.generateReferenceStringWithLocality(referenceStringLength);
+        }
+        else{
+            virtualMemory.generateRandomReferenceString(referenceStringLength);
+        }
     }
 
     public void printParameters(){
