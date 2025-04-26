@@ -12,7 +12,9 @@ public class Simulation {
     private final int numberOfFrames;
     private final int totalNumberOfPages;
     private final int referenceStringLength;
+
     private final int localityLevel;
+    private final double localityFactor;
 
     private VirtualMemory virtualMemory;
     private PhysicalMemory physicalMemory;
@@ -24,7 +26,9 @@ public class Simulation {
             int numberOfFrames,
             int totalNumberOfPages,
             int referenceStringLength,
+
             int localityLevel,
+            double localityFactor,
 
             boolean printFIFO,
             boolean printRAND,
@@ -35,7 +39,9 @@ public class Simulation {
         this.numberOfFrames = numberOfFrames;
         this.totalNumberOfPages = totalNumberOfPages;
         this.referenceStringLength = referenceStringLength;
+
         this.localityLevel = localityLevel;
+        this.localityFactor = localityFactor;
 
         virtualMemory = new VirtualMemory(totalNumberOfPages);
         physicalMemory = new PhysicalMemory(numberOfFrames);
@@ -52,7 +58,7 @@ public class Simulation {
 
     public void generateReferenceString(){
         if(localityLevel > 0){
-            virtualMemory.generateReferenceStringWithLocality(referenceStringLength, localityLevel);
+            virtualMemory.generateReferenceStringWithLocality(referenceStringLength, localityLevel, localityFactor);
         }
         else{
             virtualMemory.generateRandomReferenceString(referenceStringLength);

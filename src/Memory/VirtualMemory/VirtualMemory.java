@@ -66,7 +66,7 @@ public class VirtualMemory {
         //referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5'),};
     }
 
-    public void generateReferenceStringWithLocality(int stringLength, int approxNumberOfLocalities){
+    public void generateReferenceStringWithLocality(int stringLength, int approxNumberOfLocalities, double localityFactor){
         referenceString = new Page[stringLength];
 
         int nextLocalitySwitch = stringLength / approxNumberOfLocalities;
@@ -77,13 +77,18 @@ public class VirtualMemory {
         int bound = Math.min(mid+radius+1, pageArray.length);
 
         for(int i = 0; i < stringLength; i++){
-            if(i == nextLocalitySwitch){
-                mid = rnd.nextInt(pageArray.length - radius);
-                origin = Math.max(0, mid-radius);
-                bound = mid+radius+1;
-                nextLocalitySwitch += rnd.nextInt(stringLength / approxNumberOfLocalities);
+            if(localityFactor > rnd.nextDouble()){
+                if(i == nextLocalitySwitch){
+                    mid = rnd.nextInt(pageArray.length - radius);
+                    origin = Math.max(0, mid-radius);
+                    bound = mid+radius+1;
+                    nextLocalitySwitch += rnd.nextInt(stringLength / approxNumberOfLocalities);
+                }
+                referenceString[i] = pageArray[rnd.nextInt(origin, bound)];
             }
-            referenceString[i] = pageArray[rnd.nextInt(origin, bound)];
+            else{
+                referenceString[i] = pageArray[rnd.nextInt(pageArray.length)];
+            }
         }
     }
 
