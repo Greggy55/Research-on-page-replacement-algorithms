@@ -81,10 +81,17 @@ public class Page implements Comparable<Page> {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Page){
-            Page p = (Page)obj;
+        if(obj instanceof Page p){
             return this.sameIdAs(p);
         }
         throw new IllegalStateException("Not a Page");
+    }
+
+    @Override
+    public int hashCode() {
+        if(isInt){
+            return idInt;
+        }
+        return idChar;
     }
 }

@@ -45,10 +45,8 @@ public abstract class Algorithm {
         }
 
         for(iter = 0; iter < referenceString.length; iter++){
-            //refresh();
             currentPage = referenceString[iter];
             updateLastReference();
-            System.out.println(lastReference);
 
             if(print){
                 System.out.println();
