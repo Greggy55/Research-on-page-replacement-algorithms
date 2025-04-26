@@ -5,8 +5,6 @@ import Algorithms.RAND;
 import Memory.PhysicalMemory.PhysicalMemory;
 import Memory.VirtualMemory.VirtualMemory;
 
-import java.util.Arrays;
-
 public class Simulation {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[38;5;228m";
@@ -14,7 +12,7 @@ public class Simulation {
     private final int numberOfFrames;
     private final int totalNumberOfPages;
     private final int referenceStringLength;
-    private final boolean locality;
+    private final int localityLevel;
 
     private VirtualMemory virtualMemory;
     private PhysicalMemory physicalMemory;
@@ -26,7 +24,7 @@ public class Simulation {
             int numberOfFrames,
             int totalNumberOfPages,
             int referenceStringLength,
-            boolean locality,
+            int localityLevel,
 
             boolean printFIFO,
             boolean printRAND,
@@ -37,7 +35,7 @@ public class Simulation {
         this.numberOfFrames = numberOfFrames;
         this.totalNumberOfPages = totalNumberOfPages;
         this.referenceStringLength = referenceStringLength;
-        this.locality = locality;
+        this.localityLevel = localityLevel;
 
         virtualMemory = new VirtualMemory(totalNumberOfPages);
         physicalMemory = new PhysicalMemory(numberOfFrames);
@@ -53,8 +51,8 @@ public class Simulation {
     }
 
     public void generateReferenceString(){
-        if(locality){
-            virtualMemory.generateReferenceStringWithLocality(referenceStringLength);
+        if(localityLevel > 0){
+            virtualMemory.generateReferenceStringWithLocality(referenceStringLength, localityLevel);
         }
         else{
             virtualMemory.generateRandomReferenceString(referenceStringLength);

@@ -7,7 +7,7 @@ public class Main {
         int totalNumberOfPages = numberOfFrames * 2;
         //int totalNumberOfPages = numberOfFrames / 2;
         int referenceStringLength = 100;
-        boolean locality = true;
+        int localityLevel = 10;
 
         boolean printFIFO = true;
         boolean printRAND = true;
@@ -20,7 +20,7 @@ public class Main {
                 numberOfFrames,
                 totalNumberOfPages,
                 referenceStringLength,
-                locality,
+                localityLevel,
 
                 printFIFO,
                 printRAND,

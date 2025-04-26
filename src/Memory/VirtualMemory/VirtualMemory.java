@@ -66,9 +66,8 @@ public class VirtualMemory {
         //referenceString = new Page[]{new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('1'), new Page('2'), new Page('5'), new Page('1'), new Page('2'), new Page('3'), new Page('4'), new Page('5'),};
     }
 
-    public void generateReferenceStringWithLocality(int stringLength){
+    public void generateReferenceStringWithLocality(int stringLength, int approxNumberOfLocalities){
         referenceString = new Page[stringLength];
-        int approxNumberOfLocalities = 6;
 
         int nextLocalitySwitch = stringLength / approxNumberOfLocalities;
         int radius = 2;
