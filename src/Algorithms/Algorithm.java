@@ -46,7 +46,9 @@ public abstract class Algorithm {
 
         for(iter = 0; iter < referenceString.length; iter++){
             currentPage = referenceString[iter];
-            updateLastReference();
+            if(this instanceof LRU){
+                ((LRU) this).updateLastReference();
+            }
 
             if(print){
                 System.out.println();
@@ -84,11 +86,6 @@ public abstract class Algorithm {
             System.out.println("-".repeat(100));
             System.out.println();
         }
-    }
-
-    private void updateLastReference(){
-        lastReference.replaceAll((k, v) -> lastReference.get(k) + 1);
-        lastReference.put(currentPage, 0);
     }
 
     private void refresh(){

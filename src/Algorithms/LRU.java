@@ -2,7 +2,6 @@ package Algorithms;
 
 import Memory.PhysicalMemory.Frame;
 import Memory.PhysicalMemory.PhysicalMemory;
-import Memory.VirtualMemory.Page;
 
 public class LRU extends Algorithm {
 
@@ -44,5 +43,10 @@ public class LRU extends Algorithm {
         }
 
         return resultFrame;
+    }
+
+    public void updateLastReference(){
+        lastReference.replaceAll((k, v) -> lastReference.get(k) + 1);
+        lastReference.put(currentPage, 0);
     }
 }
