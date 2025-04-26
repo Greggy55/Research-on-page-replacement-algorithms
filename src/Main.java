@@ -4,7 +4,8 @@ public class Main {
     public static void main(String[] args) {
 
         int numberOfFrames = 10;
-        int totalNumberOfPages = 2*numberOfFrames;
+        //int totalNumberOfPages = 2*numberOfFrames;
+        int totalNumberOfPages = numberOfFrames/2;
         int referenceStringLength = 100;
 
         boolean printFIFO = true;
@@ -27,7 +28,7 @@ public class Main {
         );
 
         simulation.start();
-
+        simulation.printParameters();
         simulation.printStatistics();
     }
 }

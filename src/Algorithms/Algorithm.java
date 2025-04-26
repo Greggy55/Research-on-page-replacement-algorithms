@@ -78,8 +78,8 @@ public abstract class Algorithm {
         final int dashes = 15;
         System.out.println();
         System.out.printf("%s %s %s\n", "-".repeat(dashes), name, "-".repeat(dashes - name.length() + ANSI_GRAY.length() + ANSI_RESET.length() + dashes/3));
-        System.out.printf("Page fault count: %d\n", pageFaultCount);
-        System.out.printf("Trashing count: %d\n", thrashingCount);
+        System.out.printf("Page fault count: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, pageFaultCount);
+        System.out.printf("Trashing count: " + ANSI_YELLOW + "%d\n" + ANSI_RESET, thrashingCount);
     }
 
     public boolean pageFault() {

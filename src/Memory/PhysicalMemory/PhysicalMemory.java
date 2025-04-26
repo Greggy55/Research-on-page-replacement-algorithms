@@ -19,7 +19,7 @@ public class PhysicalMemory {
     public int indexOfPage(Page page){
         for(int i = 0; i < numberOfFrames; i++){
             if(frameArray[i].containsPage()
-                    && page.id == frameArray[i].getPage().id){
+                    && page.sameIdAs(frameArray[i].getPage())){
                 return i;
             }
         }
