@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class VirtualMemory {
-    private static final boolean INT_TYPE = true;
+    public static boolean INT_TYPE = true;
 
     private static final ArrayList<Character> used = new ArrayList<>();
     private static final char emptyChar = ' ';

@@ -1,5 +1,6 @@
 import Memory.PhysicalMemory.Frame;
 import Memory.VirtualMemory.Page;
+import Memory.VirtualMemory.VirtualMemory;
 import Simulation.Simulation;
 
 public class Main {
@@ -8,13 +9,16 @@ public class Main {
         Frame.COLOR = true;
         Page.COLOR = true;
 
+        VirtualMemory.INT_TYPE = false;
+
         int numberOfFrames = 20;
         int totalNumberOfPages = 40;
         int referenceStringLength = 100;
         // 4 5 12
 
-        int localityLevel = 10;
+        int localityLevel = 12;
         double localityFactor = 0.8;
+        // 12 0.8
 
         boolean printFIFO = true;
         boolean printRAND = true;
